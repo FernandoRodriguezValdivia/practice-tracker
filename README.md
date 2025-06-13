@@ -1,54 +1,48 @@
-# React + TypeScript + Vite
+# Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este es un proyecto de prueba diseñado para simular un **sistema de rastreo de envíos**, enfocado en demostrar habilidades modernas con **React 18**, incluyendo:
 
-Currently, two official plugins are available:
+- Manejo de formularios controlados
+- `useTransition` para renders diferidos
+- Simulación de fetch con datos mock
+- Manejo de estados: loading, error y resultado
+- TailwindCSS para diseño responsivo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 📸 Vista previa
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+![demo](./previews/preview1.png) <!-- Puedes colocar un screenshot si deseas -->
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Tecnologías usadas
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- [React 18](https://react.dev/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [Vite](https://vitejs.dev/)
+- [`useTransition`](https://react.dev/reference/react/useTransition)
+- `TypeScript`
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+---
+
+## 🧪 Funcionalidad principal
+
+1. El usuario ingresa un **ID de envío** (ej. `ABC123` o `XYZ789`).
+2. Al hacer clic en "Buscar", se simula una llamada a una API con retraso.
+3. Durante la espera, se muestra un mensaje de **cargando...** usando `isPending`.
+4. Al obtener resultados:
+   - Se muestran el estado, ubicación, ETA y el historial.
+5. Si no existe el ID, se muestra un mensaje de error.
+
+---
+
+## 📦 Datos simulados
+
+El fetch es simulado con un objeto local:
+
+```ts
+const SHIPMENTS = {
+  ABC123: { status: "En tránsito", ... },
+  XYZ789: { status: "Entregado", ... }
+};
