@@ -15,17 +15,15 @@ export default function App() {
     setIsLoading(true);
       fetchShipmentById(query)
         .then((res) => {
-          // startTransition(() => {
+          startTransition(() => {
             setShipment(res); // Esto sí causa un render diferido
-          // });
+          });
         })
         .catch((err) => setError(err.message))
         .finally(() => {
           setIsLoading(false);
         });
   };
-
-  console.log(isPending);
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
@@ -49,13 +47,6 @@ export default function App() {
       </div>
 
       {shipment && <ShipmentCard shipment={shipment} />}
-      {shipment && (
-        <div className="grid grid-cols-1 gap-2">
-          {Array.from({ length: 5000 }).map((_, i) => (
-            <p key={i}>{shipment.status}</p>
-          ))}
-        </div>
-      )}
       {isLoading && <p className="text-center mt-4 text-gray-500">Cargando...</p>}
     </div>
   );
